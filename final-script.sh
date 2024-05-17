@@ -25,11 +25,5 @@ calculate_offsets() {
     "/usr/lib/systemd/boot/efi/linuxx64.efi.stub" "linux.efi"
 }
 
-# Check if root user is executing the script
-if [ "$(id -u)" != "0" ]; then
-    echo "This script must be run as root"
-    exit 1
-fi
-
 # Call the function to calculate offsets and run objcopy
 calculate_offsets
