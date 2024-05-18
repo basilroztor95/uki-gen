@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = linux
+Target = intel-ucode
+
+[Action]
+Description = Update linux.efi after kernel or microcode upgrade
+When = PostTransaction
+Exec = /usr/local/bin/uki.sh
