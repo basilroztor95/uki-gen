@@ -32,18 +32,22 @@ calculate_aligned_offset() {
 
 # Function to calculate offsets and update EFI binary
 update_efi_binary() {
+    # Get section alignment from EFI stub
     local align_hex=$(objdump -p "$EFI_STUB" | awk '/SectionAlignment/ {print $2}')
     local align=$((16#$align_hex))
 
+    # Get sizes of cmdline, initrd, and kernel files
     local cmdline_size=$(stat -Lc %s "$CMDLINE_TXT")
     local initrd_size=$(stat -Lc %s "$COMBINED_INITRD")
     local linux_size=$(stat -Lc %s "$LINUX_KERNEL")
-
+    
+    # Calculate cmdline offset
     local cmdline_offset_hex=$(objdump -h "$EFI_STUB" | awk 'NF==7 {size=strtonum("0x"$3); offset=strtonum("0x"$4)} END {print size + offset}')
     local cmdline_offset=$(calculate_aligned_offset $cmdline_offset_hex 0 $align)
     local initrd_offset=$(calculate_aligned_offset $cmdline_offset $cmdline_size $align)
     local linux_offset=$(calculate_aligned_offset $initrd_offset $initrd_size $align)
 
+   # Add sections to EFI stub
     objcopy \
         --add-section .cmdline="$CMDLINE_TXT" --change-section-vma .cmdline=$(printf 0x%x $cmdline_offset) \
         --add-section .initrd="$COMBINED_INITRD" --change-section-vma .initrd=$(printf 0x%x $initrd_offset) \
