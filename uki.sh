@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Exit immediately if a command exits with a non-zero status or if an unset variable is used
+# Exit immediately if a command exits with a non-zero status or if an unset variable is used, or if a pipeline fails
 set -euo pipefail
 
 # Define file paths
