@@ -78,7 +78,7 @@ chmod +x uki-gen.sh
 efibootmgr -c -d /dev/nvme0n1 -p 1 -l '\EFI\Linux\linux.efi' -u
 ```
 
-## For automatic generate UKI when kernel or ucode update
+## For automatic generate UKI when kernel or microcode update
 
 - Move `uki-gen.sh` to `/urs/local/bin`
 - Create pacman hook
