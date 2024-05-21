@@ -12,6 +12,13 @@ This script combines a microcode image, an initrd image, a kernel image, and a c
   - Kernel image: `vmlinuz-linux`
   - Microcode image: `intel-ucode.img` or `amd-ucode.img`
   - Initrd image: `booster-linux.img` or `initramfs-linux.img`
+ 
+  - Change this constants to your own in uki-gen.sh:
+```bash
+KERNEL="/path/to/kernel"
+UCODE="/path/to/microcode"
+INITRD="/path/to/initrd"
+```
 
 ## Usage
 
