@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 
 # Exit immediately if a command exits with a non-zero status, if an unset variable is used, or if a pipeline fails
 set -euo pipefail
