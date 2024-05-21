@@ -89,8 +89,7 @@ efibootmgr -c -d /dev/nvme0n1 -p 1 -l '\EFI\Linux\linux.efi' -u
 
 - Move `uki-gen.sh` to `/urs/local/bin`
 - Create pacman hook
-
-### Create pacman hook `/etc/pacman.d/hooks/update-uki.hook`
+ `/etc/pacman.d/hooks/update-uki.hook`
 
 ```
 [Trigger]
