@@ -104,6 +104,7 @@ Description = Update linux.efi after kernel or microcode upgrade
 When = PostTransaction
 Exec = /usr/local/bin/uki-gen.sh
 ```
+- Replace Targets with your own kernel and microcode packagas. Names must be match with names which uses in your package manager.
 
 ## Notes
 
