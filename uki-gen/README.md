@@ -9,13 +9,13 @@ This script combines a microcode image, an initrd image, a kernel image, and a c
 - Required files:
   - EFI stub: `/usr/lib/systemd/boot/efi/linuxx64.efi.stub`
   - Cmdline: `/proc/cmdline`
-  - Kernel image: `/boot/vmlinuz-linux`
-  - Microcode image: `/boot/intel-ucode.img`
-  - Initrd image: `/boot/booster-linux.img`
+  - Kernel image: `vmlinuz-linux`
+  - Microcode image: `intel-ucode.img` or `amd-ucode.img`
+  - Initrd image: `booster-linux.img` or `initramfs-linux.img`
 
 ## Usage
 
-1. **Ensure all required files are available**: The script checks for the existence of required files and will exit with an error message if any are missing.
+1. **Ensure all required files are available**: The script checks for the existence of required files and will exit with an error message if any are missing. 
 
 2. **Run the script**: Execute the script with appropriate permissions.
 ```bash
