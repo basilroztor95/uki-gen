@@ -6,7 +6,7 @@ set -euo pipefail
 # Define file paths
 EFI_STUB="/usr/lib/systemd/boot/efi/linuxx64.efi.stub"
 COMBINED_INITRD="/tmp/comb_initrd.img"
-CMDLINE="/proc/cmdline"
+CMDLINE="/boot/cmdline"
 KERNEL="/boot/vmlinuz-linux"
 UCODE="/boot/intel-ucode.img"
 INITRD="/boot/booster-linux.img"
