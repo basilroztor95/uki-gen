@@ -31,10 +31,9 @@ chmod +x uki-gen.sh
 ./uki-gen.sh
 ```
 
-3. **Output**: The resulting EFI binary will be created at `/efi/EFI/Linux/linux.efi`.
-
-4. If does not exist create it:
-   mkdir /efi/EFI/Linux
+3. **Output**: The resulting EFI binary will be created at `/efi/EFI/Linux/linux.efi`
+if does not exist create it:
+`mkdir -p /efi/EFI/Linux`
 
 ## Script Details
 
