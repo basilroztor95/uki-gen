@@ -8,7 +8,7 @@ This script combines a microcode image, an initrd image, a kernel image, and a c
 - `objdump` and `objcopy` utilities (typically available in the `binutils` package)
 - Required files:
   - EFI stub: `/usr/lib/systemd/boot/efi/linuxx64.efi.stub`
-  - Cmdline: `/proc/cmdline`
+  - Cmdline: `/boot/cmdline`
   - Kernel image: `vmlinuz-linux`
   - Microcode image: `intel-ucode.img` or `amd-ucode.img`
   - Initrd image: `booster-linux.img` or `initramfs-linux.img`
@@ -18,6 +18,7 @@ This script combines a microcode image, an initrd image, a kernel image, and a c
 KERNEL="/path/to/kernel"
 UCODE="/path/to/microcode"
 INITRD="/path/to/initrd"
+CMDLINE="/path/to/cmdline"
 ```
 
 ## Usage
@@ -32,13 +33,16 @@ chmod +x uki-gen.sh
 
 3. **Output**: The resulting EFI binary will be created at `/efi/EFI/Linux/linux.efi`.
 
+4. If does not exist create it:
+   mkdir /efi/EFI/Linux
+
 ## Script Details
 
 ### File Paths
 
 - `EFI_STUB`: Path to the EFI stub (`/usr/lib/systemd/boot/efi/linuxx64.efi.stub`)
 - `COMBINED_INITRD`: Path for the combined initrd image (`/tmp/comb_initrd.img`)
-- `CMDLINE`: Path to the cmdline file (`/proc/cmdline`)
+- `CMDLINE`: Path to the cmdline file (`/boot/cmdline`)
 - `KERNEL`: Path to the kernel image (`/boot/vmlinuz-linux`)
 - `UCODE`: Path to the microcode image (`/boot/intel-ucode.img`)
 - `INITRD`: Path to the initrd image (`/boot/booster-linux.img`)
@@ -79,7 +83,7 @@ A trap is set to call the `cleanup` function on script exit, ensuring temporary 
 ### Example with LUKS encryption rootfs and efibootmgr for creation entry
 
 ```bash
-echo "rd.luks.uuid=$(cryptsetup luksUUID /dev/nvme0n1p2) root=UUID=$(blkid -s UUID -o value /dev/mapper/rootfs)" > /proc/cmdline
+echo "rd.luks.uuid=$(cryptsetup luksUUID /dev/nvme0n1p2) root=UUID=$(blkid -s UUID -o value /dev/mapper/rootfs)" > /boot/cmdline
 chmod +x uki-gen.sh
 ./uki-gen.sh
 efibootmgr -c -d /dev/nvme0n1 -p 1 -l '\EFI\Linux\linux.efi' -u
